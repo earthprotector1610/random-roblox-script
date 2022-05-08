@@ -1,0 +1,50 @@
+--BROUGHT TO YOU BY RSCRIPTS.NET--
+
+local plr = game.Players.LocalPlayer -- Local player variable
+local plrChar = plr.Character -- Local character variable
+local hRP = plrChar.HumanoidRootPart -- Character humanoid root part variable
+
+local heistNumber = 1
+
+while heistNumber < 19 do
+   
+   for vIndex ,vItem in pairs (game:GetService("Workspace").jobInstances.criminal.heists:FindFirstChild(heistNumber):GetChildren()) do
+   
+       if (vItem:IsA("Part")) then -- Use only "Parts"
+           
+           local attempts = 10
+           
+           while attempts > 0 do
+               
+               wait()
+           
+               for i ,v in pairs (vItem:GetChildren()) do
+                   
+                   local mFound = false
+               
+                   if v:IsA("Model") then
+                       
+                       mFound = true
+                       
+                   end
+                   
+                   if mFound == true then
+                       
+                       print(vItem.Name)
+                       game:GetService("ReplicatedStorage").remoteInterface.jobs.action:InvokeServer(vItem,1)
+                       
+                   end
+                   
+               end
+               
+               attempts = attempts - 1
+                   
+           end
+           
+       end
+   
+   end
+
+   heistNumber = heistNumber + 1   
+ 
+end
